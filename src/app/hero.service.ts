@@ -3,16 +3,18 @@ import { Observable, of } from "rxjs";
 
 import { Hero } from "./hero";
 import { HEROES } from "./mock-heroes";
+import { MessagesService } from "./messages.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
 
-  constructor() { }
+  constructor(private messageService: MessagesService) { }
 
   getHeros(): Observable<Hero[]> {
     const heroes = of(HEROES);
+    this.messageService.add('HeroService: fetched heroes');
     return heroes;
   }
 
